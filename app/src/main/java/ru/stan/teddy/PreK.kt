@@ -1,5 +1,6 @@
 package ru.stan.teddy
 
+import android.content.Context
 import android.preference.PreferenceManager
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun PreK() {
     val context = LocalContext.current
-    val sharedPreferences2 = PreferenceManager.getDefaultSharedPreferences(context)
+    val sharedPreferences2 = context.getSharedPreferences("my_shared_preferences2", Context.MODE_PRIVATE)
     val editor2 = sharedPreferences2.edit()
     val correctCode2 = "234" // Предположим, что правильный код - "234"
 

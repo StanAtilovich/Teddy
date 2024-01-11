@@ -1,5 +1,6 @@
 package ru.stan.teddy
 
+import android.content.Context
 import android.preference.PreferenceManager
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +28,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HelloAbc() {
     val context = LocalContext.current
-    val sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(context)
+    val sharedPreferences1 = context.getSharedPreferences("my_shared_preferences1", Context.MODE_PRIVATE)
     val editor1 = sharedPreferences1.edit()
     val correctCode1 = "1234" // Предположим, что правильный код - "1234"
 

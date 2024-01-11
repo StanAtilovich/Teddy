@@ -1,5 +1,6 @@
 package ru.stan.teddy
 
+import android.content.Context
 import android.preference.PreferenceManager
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +22,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Kcource() {
     val context = LocalContext.current
-    val sharedPreferences3 = PreferenceManager.getDefaultSharedPreferences(context)
+    val sharedPreferences3 = context.getSharedPreferences("my_shared_preferences3", Context.MODE_PRIVATE)//PreferenceManager.getDefaultSharedPreferences(context)
     val editor3 = sharedPreferences3.edit()
     val correctCode3 = "34" // Предположим, что правильный код - "234"
 
