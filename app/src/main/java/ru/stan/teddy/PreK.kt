@@ -33,12 +33,17 @@ fun PreK() {
         mutableStateOf(sharedPreferences2.getString("enteredCode2", "") ?: "")
     }
 
+    val isCodeEnteredCorrectly2 = remember {
+        mutableStateOf(enteredCode2.value == correctCode2)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
+        if (!isCodeEnteredCorrectly2.value) {
         OutlinedTextField(
             value = enteredCode2.value,
             onValueChange = {
@@ -58,6 +63,13 @@ fun PreK() {
             )
         } else {
             Text("Please enter the correct code")
+        }
+    }
+        else {
+            Image(
+                painter = painterResource(id = R.drawable.ic_screen1),
+                contentDescription = "Correct Image"
+            )
         }
     }
 }
