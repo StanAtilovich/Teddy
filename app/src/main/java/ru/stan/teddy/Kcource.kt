@@ -22,12 +22,16 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Kcource() {
     val context = LocalContext.current
-    val sharedPreferences3 = context.getSharedPreferences("my_shared_preferences3", Context.MODE_PRIVATE)//PreferenceManager.getDefaultSharedPreferences(context)
+    val sharedPreferences3 = context.getSharedPreferences("my_shared_preferences3", Context.MODE_PRIVATE)
     val editor3 = sharedPreferences3.edit()
     val correctCode3 = "34" // Предположим, что правильный код - "234"
 
     val enteredCode3 = remember {
         mutableStateOf(sharedPreferences3.getString("enteredCode3", "") ?: "")
+    }
+
+    val isCodeEnteredCorrectly3 = remember {
+        mutableStateOf(enteredCode3.value == correctCode3)
     }
 
     Column(
@@ -36,6 +40,7 @@ fun Kcource() {
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
+        if (!isCodeEnteredCorrectly3.value) {
         OutlinedTextField(
             value = enteredCode3.value,
             onValueChange = {
@@ -55,6 +60,13 @@ fun Kcource() {
             )
         } else {
             Text("Please enter the correct code")
+        }
+    }
+        else {
+            Image(
+                painter = painterResource(id = R.drawable.ic_screen3),
+                contentDescription = "Correct Image"
+            )
         }
     }
 }
