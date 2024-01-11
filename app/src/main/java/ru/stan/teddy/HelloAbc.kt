@@ -28,12 +28,17 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HelloAbc() {
     val context = LocalContext.current
-    val sharedPreferences1 = context.getSharedPreferences("my_shared_preferences1", Context.MODE_PRIVATE)
+    val sharedPreferences1 =
+        context.getSharedPreferences("my_shared_preferences1", Context.MODE_PRIVATE)
     val editor1 = sharedPreferences1.edit()
     val correctCode1 = "1234" // Предположим, что правильный код - "1234"
 
     val enteredCode1 = remember {
         mutableStateOf(sharedPreferences1.getString("enteredCode1", "") ?: "")
+    }
+
+    val isCodeEnteredCorrectly = remember {
+        mutableStateOf(enteredCode1.value == correctCode1)
     }
 
     Column(
@@ -42,25 +47,32 @@ fun HelloAbc() {
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        OutlinedTextField(
-            value = enteredCode1.value,
-            onValueChange = {
-                enteredCode1.value = it
-                editor1.putString("enteredCode1", it)
-                editor1.apply()
-            },
-            label = { Text("Enter the code") }
-        )
+        if (!isCodeEnteredCorrectly.value) {
+            OutlinedTextField(
+                value = enteredCode1.value,
+                onValueChange = {
+                    enteredCode1.value = it
+                    editor1.putString("enteredCode1", it)
+                    editor1.apply()
+                },
+                label = { Text("Enter the code") }
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        if (enteredCode1.value == correctCode1) {
+            if (enteredCode1.value == correctCode1) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_screen2),
+                    contentDescription = "Correct Image"
+                )
+            } else {
+                Text("Please enter the correct code")
+            }
+        } else {
             Image(
                 painter = painterResource(id = R.drawable.ic_screen2),
                 contentDescription = "Correct Image"
             )
-        } else {
-            Text("Please enter the correct code")
         }
     }
 }
