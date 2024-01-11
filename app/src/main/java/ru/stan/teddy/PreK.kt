@@ -24,13 +24,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun PreK() {
     val context = LocalContext.current
-    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    val editor = sharedPreferences.edit()
+    val sharedPreferences2 = PreferenceManager.getDefaultSharedPreferences(context)
+    val editor2 = sharedPreferences2.edit()
+    val correctCode2 = "234" // Предположим, что правильный код - "234"
 
-    val correctCode = "234" // Предположим, что правильный код - "234"
-
-    val enteredCode = remember {
-        mutableStateOf(sharedPreferences.getString("enteredCode", "") ?: "")
+    val enteredCode2 = remember {
+        mutableStateOf(sharedPreferences2.getString("enteredCode2", "") ?: "")
     }
 
     Column(
@@ -40,18 +39,18 @@ fun PreK() {
         verticalArrangement = Arrangement.Center
     ) {
         OutlinedTextField(
-            value = enteredCode.value,
+            value = enteredCode2.value,
             onValueChange = {
-                enteredCode.value = it
-                editor.putString("enteredCode", it)
-                editor.apply()
+                enteredCode2.value = it
+                editor2.putString("enteredCode2", it)
+                editor2.apply()
             },
             label = { Text("Enter the code") }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (enteredCode.value == correctCode) {
+        if (enteredCode2.value == correctCode2) {
             Image(
                 painter = painterResource(id = R.drawable.ic_screen1),
                 contentDescription = "Correct Image"
