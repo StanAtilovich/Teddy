@@ -1,7 +1,8 @@
 package ru.stan.teddy
 
 import android.content.Context
-import android.preference.PreferenceManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
 fun Kcource() {
@@ -54,19 +56,27 @@ fun Kcource() {
         Spacer(modifier = Modifier.height(16.dp))
 
         if (enteredCode3.value == correctCode3) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_screen3),
-                contentDescription = "Correct Image"
-            )
+            WebViewComponent3()
         } else {
             Text("Please enter the correct code")
         }
     }
         else {
-            Image(
-                painter = painterResource(id = R.drawable.ic_screen3),
-                contentDescription = "Correct Image"
-            )
+            WebViewComponent3()
         }
     }
+}
+
+@Composable
+fun WebViewComponent3() {
+    val context = LocalContext.current
+    AndroidView(
+        modifier = Modifier.fillMaxSize(),
+        factory = { WebView(context) },
+        update = { webView ->
+            webView.webViewClient = WebViewClient()
+            webView.settings.javaScriptEnabled = true
+            webView.loadUrl("https://www.youtube.com/playlist?list=PL-HApJy1B-fdf_NXyIy30mWtDYk1S2nas")
+        }
+    )
 }

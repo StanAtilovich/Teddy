@@ -1,28 +1,33 @@
 package ru.stan.teddy
 
 import android.content.Context
-import android.preference.PreferenceManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.Button
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
+import androidx.lifecycle.LifecycleOwner
 
 
 @Composable
@@ -61,21 +66,36 @@ fun HelloAbc() {
             Spacer(modifier = Modifier.height(16.dp))
 
             if (enteredCode1.value == correctCode1) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_screen2),
-                    contentDescription = "Correct Image"
-                )
+
+                WebViewComponent()
+
             } else {
                 Text("Please enter the correct code")
             }
         } else {
-            Image(
-                painter = painterResource(id = R.drawable.ic_screen2),
-                contentDescription = "Correct Image"
-            )
+            WebViewComponent()
         }
     }
 }
+
+@Composable
+fun WebViewComponent() {
+    val context = LocalContext.current
+    AndroidView(
+        modifier = Modifier.fillMaxSize(),
+        factory = { WebView(context) },
+        update = { webView ->
+            webView.webViewClient = WebViewClient()
+            webView.settings.javaScriptEnabled = true
+            webView.loadUrl("https://www.youtube.com/playlist?list=PL-HApJy1B-fd5kjtKfBDtQYuzMmkrTsly")
+        }
+    )
+}
+
+
+
+
+
 
 
 
