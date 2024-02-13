@@ -9,13 +9,13 @@
               <type value="RUNNING_DEVICE_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\lukin\.android\avd\Pixel_7_Pro_API_30_2.avd" />
+                  <type value="SERIAL_NUMBER" />
+                  <value value="2f76ca110408" />
                 </Key>
               </deviceKey>
             </Target>
           </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-12T06:47:53.902672Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-02-13T12:01:23.433107200Z" />
         </State>
       </entry>
     </value>

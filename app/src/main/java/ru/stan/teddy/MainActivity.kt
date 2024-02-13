@@ -1,7 +1,9 @@
 package ru.stan.teddy
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.view.Surface
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,8 +12,13 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -49,7 +56,21 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         topBar = {
                             TopAppBar(
-                                title = { Text(stringResource(R.string.app_name)) }
+                                title = { Text(stringResource(R.string.app_name)) },
+                                actions = {
+                                    IconButton(onClick = { /* действие для первой кнопки */ }) {
+                                        Icon(Icons.Default.Favorite, contentDescription = "Favorite")
+                                    }
+                                    IconButton(onClick = { /* действие для второй кнопки */ }) {
+                                        Icon(Icons.Default.Search, contentDescription = "Search")
+                                    }
+                                    IconButton(onClick = { /* действие для третьей кнопки */ }) {
+                                        Icon(Icons.Default.Share, contentDescription = "Share")
+                                    }
+                                    IconButton(onClick = { /* действие для четвертой кнопки */ }) {
+                                        Icon(Icons.Default.Settings, contentDescription = "Settings")
+                                    }
+                                }
                             )
                         },
                         bottomBar = {

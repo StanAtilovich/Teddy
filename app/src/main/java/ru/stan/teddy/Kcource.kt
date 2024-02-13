@@ -1,6 +1,8 @@
 package ru.stan.teddy
 
+import android.app.Activity
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.Image
@@ -64,6 +66,10 @@ fun Kcource() {
         else {
             WebViewComponent3()
         }
+    }
+    if (isCodeEnteredCorrectly3.value) {
+        val activity = (LocalContext.current as Activity)
+        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
     }
 }
 
